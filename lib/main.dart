@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SafeArea(
           child: Container(
-        child: ListView.builder(
+        child: ListView.separated(
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(contacts[index]),
@@ -45,9 +45,34 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           },
+          separatorBuilder: (context, index) {
+            return Container(
+              alignment: Alignment.center,
+              child: const Divider(
+                color: Colors.green,
+              ),
+            );
+          },
           itemCount: contacts.length,
         ),
       )),
+    );
+  }
+
+  ListView listViewBuilder() {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(contacts[index]),
+          leading: CircleAvatar(
+            child: Text(contacts[index]
+                .toString()
+                .characters
+                .first), //(Seceound Way {contacts[index].toString().split(" ")[0][0])}
+          ),
+        );
+      },
+      itemCount: contacts.length,
     );
   }
 
